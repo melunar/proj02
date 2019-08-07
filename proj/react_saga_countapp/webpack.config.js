@@ -1,3 +1,4 @@
+// require('babel-polyfill')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
@@ -7,6 +8,7 @@ module.exports = {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js'
   },
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [
       {
@@ -19,7 +21,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['js', 'jsx']
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'], // 要写全 否则dev-server会报错
   },
   plugins: [
     new htmlWebpackPlugin({

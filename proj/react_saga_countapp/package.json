@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --hot",
+    "dev": "webpack-dev-server --mode development --hot --open",
     "start": "npm run dev",
     "build": "webpack-dev-server --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,16 +13,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "html-webpack-plugin": "^3.2.0",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-router-redux": "^4.0.9-local",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.0.5",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
