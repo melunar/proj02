@@ -1,15 +1,17 @@
 import { takeEvery, takeLetest, put, call, take, fork} from 'redux-saga/effects'
+
+import { incrementAsyncAction } from './actions'
 import * as types from './types'
 
-export const delay = ms => new Promist(resolve => {
-  setTimeout(resolve, ms)
+export const delay = ms => new Promise(resolve => {
+  setTimeout(resolve(2), ms)
 })
 
 function* incrementAsync() {
-  debugger
   // 延迟1s increment
-  yield call(delay, 1000)
-  yield put({type: types.INCREMENT_ASYNC})
+  const number = yield call(delay, 1000)
+  // yield put({type: types.INCREMENT_ASYNC})
+  yield put(incrementAsyncAction(number))
 }
 export default function* rootSaga() {
   // 同理takeEvery === (take+fork)
@@ -17,6 +19,5 @@ export default function* rootSaga() {
   //   yield take(types.INCREMENT_ASYNC)
   //   yield fork(incrementAsync)
   // }
-  // ?? yield* takeEvery(types.incrementAsync, incrementAsync)
-  yield takeEvery(types.INCREMENT_ASYNC, incrementAsync)
+  yield takeEvery(types.INCREMENT_ASYNC__SAGA, incrementAsync)
 }

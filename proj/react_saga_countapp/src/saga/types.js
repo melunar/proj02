@@ -1,3 +1,6 @@
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 export const INCREMENT_ASYNC = 'INCREMENT_ASYNC'
+
+// saga
+export const INCREMENT_ASYNC__SAGA = 'INCREMENT_ASYNC__SAGA'

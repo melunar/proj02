@@ -8,7 +8,6 @@ import rootSaga from './saga/sagas'
 import rootReducer from './saga/reducers'
 
 import App from './app'
-import * as types from './saga/types'
 
 // create middleware
 const sagaMiddleware = createSagaMiddleware()
@@ -23,20 +22,16 @@ const store = creatStoreWithMiddleware(rootReducer)
 sagaMiddleware.run(rootSaga)
 
 // 封装 dispatch(actionType)
-const action = type => store.dispatch({ type })
+// const action = type => store.dispatch({ type })
 
-const root = document.getElementById('App') 
+const root = document.getElementById('App')
 
 function render() {
   ReactDOM.render(
-    // <Provider store={store}>
-      <App 
-        value={store && store.getState()}
-        onIncrement={() => action(types.INCREMENT)}
-        onDecrement={() => action(types.DECREMENT)}
-        onIncrementAsync={() => action(types.INCREMENT_ASYNC)}
-      />
-    // </Provider>
+    // Provider：context of Connect(App)
+    <Provider store={store}>
+      <App />
+    </Provider>
       , 
     root)
 }

@@ -4,9 +4,9 @@ import React, { Component } from 'react'
   // ? value 不更新
   let { /* value,  */onIncrement, onDecrement, onIncrementAsync } = props
   return <div>
-    <button onClick={onIncrement}>INCREMENT</button>
-    <button onClick={onDecrement}>DECREMENT</button>
-    <button onClick={onIncrementAsync}>INCREMENT_ASYNC(after 1s)</button>
+    <button onClick={onIncrement}>INCREMENT +1</button>
+    <button onClick={onDecrement}>DECREMENT -1</button>
+    <button onClick={onIncrementAsync}>INCREMENT_ASYNC +2 (after 1s)</button>
     <hr/>
     {/* <span>value: {value}</span> */}
   </div>
