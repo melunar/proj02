@@ -2,5 +2,14 @@ export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 export const INCREMENT_ASYNC = 'INCREMENT_ASYNC'
 
+export const EAT_DINNER = 'EAT_DINNER'
+export const COOK_DINNER = 'COOK_DINNER'
+export const COOKED_DINNER = 'COOKED_DINNER'
+
+
 // saga
 export const INCREMENT_ASYNC__SAGA = 'INCREMENT_ASYNC__SAGA'
+
+export const EAT_DINNER__SAGA = 'EAT_DINNER__SAGA'
+export const COOK_DINNER__SAGA = 'COOK_DINNER__SAGA'
+export const COOKED_DINNER__SAGA = 'COOKED_DINNER__SAGA'

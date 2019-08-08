@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
+import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'
 
 import rootSaga from './saga/sagas'
@@ -14,8 +15,9 @@ const sagaMiddleware = createSagaMiddleware()
 let middlewares = []
 middlewares.push(sagaMiddleware)
 
-// create store with middleware
-const creatStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
+// create store with middleware and logger
+const logger = createLogger({ diff: false })
+const creatStoreWithMiddleware = applyMiddleware(...middlewares, logger)(createStore)
 const store = creatStoreWithMiddleware(rootReducer)
 
 // 启动saga程序

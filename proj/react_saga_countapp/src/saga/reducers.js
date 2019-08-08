@@ -2,7 +2,11 @@ import { handleActions } from 'redux-actions'
 import * as types from './types'
 
 // 初始化 声明state
-const initState = 0
+const initState = {
+  counter: 0,
+  dinnerReady: false,
+  enjoyDish: false
+}
 
 // const counter = function (state = initState, action) {
 //   switch (action.type) {
@@ -18,10 +22,11 @@ const initState = 0
 // }
 
 export default handleActions({
-  // new data: action.payload
-  [types.INCREMENT]: (state/* , action */) => state + 1,
-  [types.DECREMENT]: (state/* , action */) => state - 1,
+  [types.INCREMENT]: (state/* , { payload } */) => ({ ...state, ...{ counter: state.counter + 1 } }),
+  [types.DECREMENT]: (state/* , { payload } */) => ({ ...state, ...{ counter: state.counter - 1 } }),
   [types.INCREMENT_ASYNC]: (state, { payload }) => {
-    return Number(payload) ? state + payload : state
-  }
+    return Number(payload) ? { ...state, ...{ counter: state.counter + payload } } : { ...state }
+  },
+  [types.COOKED_DINNER__SAGA]: state => ({ ...state, dinnerReady: true }),
+  [types.EAT_DINNER]: state => ({ ...state, enjoyDish: true })
 }, initState)
