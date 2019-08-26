@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import FastClick from 'fastclick'
+
+import 'antd-mobile/dist/antd-mobile.css';
+
+FastClick.attach(document.body)
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
