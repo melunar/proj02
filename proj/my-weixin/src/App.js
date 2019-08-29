@@ -36,22 +36,22 @@ export default class App extends React.Component {
         </NavBar>
         <Drawer
           className="my-drawer"
-          style={{ minHeight: document.documentElement.clientHeight }}
+          // style={{ minHeight: document.documentElement.clientHeight }}
           enableDragHandle
           contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
           sidebar={siderBarNode}
           open={this.state.drawerOpen}
           onOpenChange={this.onOpenChange}>
-            Nice to meet you here!
+            {/* Nice to meet you here! */}
+            <BrowserRouter>
+              <Switch>
+                {/* <Route path="/" exact render={() => <Redirect to={'/'+routerComs[0].pathName} />} /> */}
+                {routerComs.map((Item, index) => {
+                  return (<Route path={`/${Item.pathName}`} component={Item.component} key={index}></Route>)
+                })}
+              </Switch>
+            </BrowserRouter>
         </Drawer>
-        <BrowserRouter>
-          <Switch>
-            {/* <Route path="/" exact render={() => <Redirect to={'/'+routerComs[0].pathName} />} /> */}
-            {routerComs.map((Item, index) => {
-              return (<Route path={`/${Item.pathName}`} component={Item.component} key={index}></Route>)
-            })}
-          </Switch>
-        </BrowserRouter>
       </div>
     )
   }
