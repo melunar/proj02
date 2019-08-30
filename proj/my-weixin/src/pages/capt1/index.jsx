@@ -6,9 +6,7 @@ import { Toast } from 'antd-mobile'
 // import './style/index.css'
 
 class Capt1 extends React.PureComponent {
-  // name = '基础接口'
   state = {
-    title: '基础接口',
     wxsdkLoaded: false,
     result: 'unknow', 
     checkList: {
@@ -18,13 +16,15 @@ class Capt1 extends React.PureComponent {
     }
   }
   componentDidMount() {
-    document.title = this.state.title
     scriptJs('http://res.wx.qq.com/open/js/jweixin-1.4.0.js', () => {
       this.setState({ wxsdkLoaded: true })
     })
   }
-
-  checkJsApi = (funName) => {
+  // handleClick = (callParam) => (e) => {
+  //   console.log(e)
+  //   console.log(callParam)
+  // }
+  checkJsApi = (funName) => (e) => {
     if (!this.state.wxsdkLoaded) {
       return Toast.fail('sdk未加载或加载失败，无法检测')
     }
@@ -48,7 +48,7 @@ class Capt1 extends React.PureComponent {
     const list = Object.keys(this.state.checkList).map((keyName, index) => {
       return (
         <p key={index}>
-          <button onClick={() => { this.checkJsApi(keyName) }}>checkJsApi: {keyName}</button> 
+          <button onClick={ this.checkJsApi(keyName) /* () => { this.checkJsApi(keyName) } */}>checkJsApi: {keyName}</button> 
           <span>result：{this.state.checkList[keyName].result}</span>
         </p>
       )

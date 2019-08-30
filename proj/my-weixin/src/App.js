@@ -5,10 +5,9 @@ import { BrowserRouter, Switch, Router, Route, Redirect } from 'react-router-dom
 import { Drawer, List, NavBar, Icon } from 'antd-mobile'
 // import Guide from './pages/guide'
 import routerComs from './routers'
+import { setPageTitle } from './common/utils'
 
 import './App.css'
-
-
 
 export default class App extends React.Component {
   state = {
@@ -17,6 +16,11 @@ export default class App extends React.Component {
 
   onOpenChange = () => {
     this.setState({ drawerOpen: !this.state.drawerOpen })
+  }
+
+  setPageTitle = (title) => (e) => {
+    debugger
+    title && (document.title = title)
   }
 
   render() {
@@ -38,16 +42,21 @@ export default class App extends React.Component {
           className="my-drawer"
           // style={{ minHeight: document.documentElement.clientHeight }}
           enableDragHandle
-          contentStyle={{ color: '#A6A6A6', textAlign: 'center', paddingTop: 42 }}
+          contentStyle={{ color: '#666', textAlign: 'center', paddingTop: 42 }}
           sidebar={siderBarNode}
           open={this.state.drawerOpen}
           onOpenChange={this.onOpenChange}>
             {/* Nice to meet you here! */}
             <BrowserRouter>
               <Switch>
-                {/* <Route path="/" exact render={() => <Redirect to={'/'+routerComs[0].pathName} />} /> */}
+                <Route path="/" exact render={() => <Redirect to={'/'+routerComs[0].pathName} />} />
                 {routerComs.map((Item, index) => {
-                  return (<Route path={`/${Item.pathName}`} component={Item.component} key={index}></Route>)
+                  return <Route path={`/${Item.pathName}`} onEnter={
+                    (nextState, replaceState) => { 
+                      // todo null ??? debugger
+                      setPageTitle(Item.title)
+                    }
+                  } component={Item.component} key={index}></Route>
                 })}
               </Switch>
             </BrowserRouter>

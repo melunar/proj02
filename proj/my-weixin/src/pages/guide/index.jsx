@@ -8,11 +8,9 @@ import './style/index.css'
 // class Guide extends React.Component {
 class Guide extends React.PureComponent {
   state = {
-    title: '帮助',
     content: contentArray.map(arr => `${arr}`)
   }
   componentDidMount() {
-    document.title = this.state.title
   }
 
   render() {
