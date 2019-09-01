@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './logo.svg'
 
+import VConsole from 'vconsole'
 import { BrowserRouter, Switch, Router, Route, Redirect } from 'react-router-dom'
 import { Drawer, List, NavBar, Icon } from 'antd-mobile'
 // import Guide from './pages/guide'
@@ -8,6 +9,8 @@ import routerComs from './routers'
 import { setPageTitle } from './common/utils'
 
 import './App.css'
+
+new VConsole()
 
 export default class App extends React.Component {
   state = {
@@ -28,7 +31,7 @@ export default class App extends React.Component {
       routerComs.map((item, index) => {
         return (<List.Item key={index}
           multipleLine
-        ><a href={`/${item.pathName}`}>{item.title}</a></List.Item>)
+        ><a href={`/${item.pathName}`} className={item.type==='test'?'test':''}>{index?index+'、':''}{item.title}</a></List.Item>)
       })
     )
     return (
@@ -46,7 +49,6 @@ export default class App extends React.Component {
           sidebar={siderBarNode}
           open={this.state.drawerOpen}
           onOpenChange={this.onOpenChange}>
-            {/* Nice to meet you here! */}
             <BrowserRouter>
               <Switch>
                 <Route path="/" exact render={() => <Redirect to={'/'+routerComs[0].pathName} />} />
