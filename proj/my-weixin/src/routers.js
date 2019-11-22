@@ -1,5 +1,7 @@
 import Guide from './pages/guide'
-import Capt1 from './pages/capt1'
+import Capt1 from './pages/capt1base'
+import Capt2 from './pages/capt2share'
+import Capt3 from './pages/capt3images'
 
 // test pages
 import ReactLifeCircle from './pages/_test/react-life-circle'
@@ -9,6 +11,7 @@ const useTestPage = true
 const testPages = [
   {
     title: 'react生命周期',
+    type: 'test',
     pathName: 'reactlifecircle',
     component: ReactLifeCircle
   }
@@ -22,7 +25,17 @@ export default [
   },
   {
     title: '基础接口',
-    pathName: 'capt1',
+    pathName: 'base',
     component: Capt1
+  },
+  {
+    title: '分享接口',
+    pathName: 'share',
+    component: Capt2
+  },
+  {
+    title: '图片接口',
+    pathName: 'images',
+    component: Capt3
   }
 ].concat(useTestPage ? testPages : [])
