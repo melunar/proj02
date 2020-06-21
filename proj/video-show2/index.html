@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.28/dayjs.min.js"></script>
+  <meta name="description" content="Web site created using create-react-app" />
+  <title>视频演示</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .App {
+      text-align: center;
+    }
+
+    .App .ant-table-container {
+      background-color: white;
+      border: 1px solid #32679c;
+    }
+
+    .App .ant-table-thead {
+      background-color: #32679c;
+    }
+
+    .App .ant-table-thead>tr>th {
+      background: transparent;
+      color: white;
+    }
+
+    .App .ant-table-tbody tr:nth-child(even) {
+      background: #e3f1fe;
+    }
+
+    .App-content {
+      background-color: white;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(10px + 2vmin);
+      color: white;
+    }
+
+    .App-content .App-both-end {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-color: #32679c;
+      color: white;
+      height: 75px;
+      width: 100%;
+      font-size: 20px;
+    }
+
+    .App-content .App-both-end .row-header {
+      font-size: 28px;
+    }
+
+    .App-content .App-both-end .current-time {
+      position: absolute;
+      top: 24px;
+      right: 10px;
+      font-size: 18px;
+    }
+
+    .App-content .mid-content {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      overflow-y: hidden;
+    }
+
+    .App-content .mid-content .video-wrap,
+    .App-content .mid-content .data-list {
+      flex: 1;
+      flex-shrink: 0;
+      padding: 10px 8px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .App-content .mid-content .video-wrap video,
+    .App-content .mid-content .data-list video {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .App-content .App-row {
+      width: 100%;
+    }
+
+    /* more */
+    .ant-table-wrapper {
+      max-width: 100%;
+      /* 滚动条宽度 */
+      /* 滚动条颜色 */
+    }
+
+    /* .ant-table-wrapper ::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+.ant-table-wrapper ::-webkit-scrollbar-thumb {
+  background-color: #27314d;
+} */
+    .ant-table-wrapper table {
+      width: 100%;
+      border-spacing: 0px;
+      border-collapse: collapse;
+    }
+
+    .ant-table-wrapper table th,
+    .ant-table-wrapper table td {
+      height: 45px;
+      color: #121212;
+      font-size: 20px;
+      text-align: center;
+      border: 1px solid #32679c;
+    }
+
+    .ant-table-wrapper table thead {
+      color: white;
+      background-color: #32679c;
+    }
+
+    .ant-table-wrapper table tbody {
+      display: block;
+      width: calc(100% + 0px);
+      /*这里的0px是滚动条的宽度*/
+      height: 300px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ant-table-wrapper table thead th {
+      color: white;
+    }
+    .ant-table-wrapper table thead tr,
+    .ant-table-wrapper table tbody tr,
+    .ant-table-wrapper table tfoot tr {
+      box-sizing: border-box;
+      table-layout: fixed;
+      display: table;
+      width: 100%;
+    }
+
+    .ant-table-wrapper table tbody tr:nth-of-type(odd) {
+      background: #e3f1fe;
+    }
+
+    .ant-table-wrapper table tbody tr:nth-of-type(even) {
+      background: #FFF;
+    }
+
+    .ant-table-wrapper table tbody tr td {
+      border-bottom: none;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root">
+  </div>
+</body>
+<script type="text/babel">
+  class App extends React.Component {
+    constructor(props) {
+      super()
+      this.listRef = React.createRef()
+    }
+    state = {
+      day: dayjs().day(),
+      date: dayjs().format('YYYY年M月D日'),
+      curTime: dayjs().format('HH:mm:ss'),
+      videoPath: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+      dataList: [
+        // 这里是数据
+        { name: '李雷', ticketNumber: '10101010011', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010012', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010013', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010014', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010015', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010016', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010017', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010018', batchNumber: 1 },
+        { name: '李雷', ticketNumber: '10101010019', batchNumber: 1 },
+        { name: '李小红', ticketNumber: '10101010021', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010022', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010023', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010024', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010025', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010026', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010027', batchNumber: 2 },
+        { name: '李小红', ticketNumber: '10101010028', batchNumber: 2 },
+      ],
+      columns: [
+        { title: '姓名', dataIndex: 'name', key: 'name', width: 150 },
+        { title: '准考证', dataIndex: 'ticketNumber', key: 'ticketNumber' },
+        { title: '批次', dataIndex: 'batchNumber', key: 'batchNumber', width: 80 },
+      ],
+      tableHeight: 400,
+    }
+    componentDidMount() {
+      setInterval(() => {
+        this.setState({
+          curTime: dayjs().format('HH:mm:ss')
+        })
+      }, 1000)
+      setTimeout(() => {
+        const { clientHeight } = this.listRef
+        this.setState({ tableHeight: clientHeight - 75 })
+      })
+    }
+    render() {
+      const { dataList, columns, day, date, curTime, tableHeight, videoPath } = this.state
+      const dayZH = { 0: '日', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六' }[day]
+      return (
+        <div className="App">
+          <div className="App-content">
+            <header className="App-both-end">
+              <span className="row-header">候测区</span>
+              <span className="current-time">{date} 星期{dayZH} {curTime}</span>
+            </header>
+            <div className="mid-content">
+              <div className="video-wrap">
+                <video src={videoPath} controls="controls">
+                  您的浏览器不支持视频播放
+                  </video>
+              </div>
+              <div className="data-list" ref={el => (this.listRef = el)}>
+                <div className="ant-table-wrapper">
+                  <section className="table-box">
+                    <table cellPadding="0" cellSpacing="0">
+                      <thead>
+                        <tr>
+                          {
+                            columns.map((c, ci) => (
+                              <th key={ci}>{c.title}</th>
+                            ))
+                          }
+                        </tr>
+                      </thead>
+                      <tbody style={{ height: tableHeight + 'px' }}>
+                        {dataList.map((d, di) => (
+                          <tr key={di}>
+                            <td>{d.name}</td>
+                            <td>{d.ticketNumber}</td>
+                            <td>{d.batchNumber}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </section>
+                </div>
+              </div>
+            </div>
+            <header className="App-both-end">
+              <span className="row-bottom">温馨提示：请保持安静，耐心等候</span>
+            </header>
+          </div>
+        </div>
+      )
+    }
+  }
+  ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+  )
+</script>
+
+</html>

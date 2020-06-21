@@ -38,7 +38,7 @@ class App extends React.Component {
     ],
     columns: [
       { title: '姓名', dataIndex: 'name', key: 'name', width: 150 },
-      { title: '准考证', dataIndex: 'ticketNumber', key: 'ticketNumber' },
+      { title: '准考证', dataIndex: 'ticketNumber', key: 'ticketNumber', width: 250 },
       { title: '批次', dataIndex: 'batchNumber', key: 'batchNumber', width: 80 },
     ],
     tableHeight: 400,
@@ -50,10 +50,8 @@ class App extends React.Component {
       })
     }, 1000)
     setTimeout(() => {
-      const {clientWidth, clientHeight} = this.listRef
+      const {clientHeight} = this.listRef
       this.setState({ tableHeight: clientHeight - 80 })
-      // height: this.container.offsetHeight
-
     })
   }
   render () {
@@ -73,7 +71,37 @@ class App extends React.Component {
               </video>
             </div>
             <div className="data-list" ref={el => (this.listRef = el)}>
-              <Table dataSource={dataList} columns={columns} pagination={false} key="ticketNumber" scroll={{ y: tableHeight }}/>
+              {/* <Table dataSource={dataList} columns={columns} pagination={false} key="ticketNumber" scroll={{ y: tableHeight }}/> */}
+              <div className="ant-table-wrapper">
+                {/* <div className="ant-table ant-table-fixed-header">
+                  <div className="ant-table-container">
+                    <div className="ant-table-header"></div>
+                  </div>
+                </div> */}
+                    <section className="table-box">
+                      <table cellPadding="0" cellSpacing="0">
+                          <thead>
+                              <tr>
+                                {
+                                  columns.map((c, ci) => (
+                                    <th key={ci}>{c.title}</th>
+                                  ))
+                                }
+                              </tr>
+                          </thead>
+              
+                          <tbody>
+                            {dataList.map((d, di) => (
+                              <tr key={di}>
+                                  <td>{d.name}</td>
+                                  <td>{d.ticketNumber}</td>
+                                  <td>{d.batchNumber}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                      </table>
+                  </section>
+              </div>
             </div>
           </div>
           <header className="App-both-end">

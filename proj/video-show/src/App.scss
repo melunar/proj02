@@ -73,3 +73,97 @@ $mainColor: #32679c;
     width: 100%;
   }
 }
+// more
+.ant-table-wrapper {
+  max-width: 100%;
+//   .ant-table {
+//     -webkit-box-sizing: border-box;
+//     box-sizing: border-box;
+//     margin: 0;
+//     padding: 0;
+//     color: rgba(0, 0, 0, 0.65);
+//     font-variant: tabular-nums;
+//     line-height: 1.5715;
+//     list-style: none;
+//     -webkit-font-feature-settings: 'tnum';
+//     font-feature-settings: 'tnum', "tnum";
+//     position: relative;
+//     z-index: 0;
+//     clear: both;
+//     font-size: 14px;
+//     background: #fff;
+//     border-radius: 2px;
+// }
+// .ant-table-header {
+//   overflow: hidden;
+// }
+.table-box {
+  // margin: 100px auto;
+  // width: 1024px;
+}
+
+/* 滚动条宽度 */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+/* 滚动条颜色 */
+::-webkit-scrollbar-thumb {
+  background-color: #27314d;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+// table caption{
+//   font-weight: bold;
+//   font-size: 24px;
+//   line-height: 50px;
+// }
+
+table th, table td {
+  height: 50px;
+  text-align: center;
+  border: 1px solid gray;
+}
+
+table thead {
+  color: white;
+  background-color: #38F;
+}
+
+table tbody {
+  display: block;
+  width: calc(100% + 8px); /*这里的8px是滚动条的宽度*/
+  height: 300px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table tfoot {
+  background-color: #71ea71;
+}
+
+table thead tr, table tbody tr, table tfoot tr {
+  box-sizing: border-box;
+  table-layout: fixed;
+  display: table;
+  width: 100%;
+}
+
+table tbody tr:nth-of-type(odd) {
+  background: #EEE;
+}
+
+table tbody tr:nth-of-type(even) {
+  background: #FFF;
+}
+
+table tbody tr td{
+  border-bottom: none;
+}
+}
