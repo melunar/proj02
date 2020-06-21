@@ -1,0 +1,75 @@
+$mainColor: #32679c;
+
+.App {
+  text-align: center;
+  .ant-table-container {
+    background-color: white;
+    border: 1px solid $mainColor;
+  }
+  .ant-table-thead {
+    background-color: $mainColor;
+  }
+  .ant-table-thead > tr > th {
+    background: transparent;
+    color: white;
+  }
+  .ant-table-tbody {
+    tr:nth-child(even) {
+      background: #e3f1fe;
+    }
+  }
+}
+
+.App-content {
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  .App-both-end {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: $mainColor;
+    color: white;
+    height: 75px;
+    width: 100%;
+    font-size: 20px;
+    .row-header {
+      font-size: 28px;
+    }
+    .current-time {
+      position: absolute;
+      top: 24px;
+      right: 10px;
+      font-size: 18px;
+    }
+  }
+  .mid-content {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    overflow-y: hidden;
+    .video-wrap, .data-list {
+      flex: 1;
+      flex-shrink: 0;
+      padding: 10px 8px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      video {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+  .App-row {
+    width: 100%;
+  }
+}
