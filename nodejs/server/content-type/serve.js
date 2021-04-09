@@ -8,6 +8,8 @@ var multipart = require('connect-multiparty')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 // 用来解析 form-data body
 var multipartMiddleware = multipart()
+// 用来解析 application-json body
+let jsonParser = bodyParser.json({extended: false})
 
 app.all('*',function(req,res,next){
     res.setHeader('Access-Control-Allow-Origin',"*");
@@ -27,6 +29,11 @@ app.post('/form-data', multipartMiddleware, function (req, res) {
   res.json({ result: 'success', data: req.body })
 })
 
+/** application-json 数据类型接口演示 */
+app.post('/application-json', jsonParser, function (req, res) {
+  console.log('get application-json Params: ', req.body)
+  res.json({ result: '您发送的数据是：', data: req.body })
+})
 const port = 3111
 app.listen(port, () => {
   console.log(`Started at port ${port}`)

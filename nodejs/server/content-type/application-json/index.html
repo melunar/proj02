@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>application/x-www-form-urlencoded</title>
+</head>
+
+<body>
+  <p>First name: <input type="text" name="fname" /></p>
+  <p>Last name: <input type="text" name="lname" /></p>
+  <button onclick="submit()">Submit</button>
+  <br>
+  <p>
+    返回结果：
+    <p style="color:red" id="result"></p>
+  </p>
+  <script>
+    submit = function () {
+      var fname = document.getElementsByName('fname')[0].value  //用户输入的 fname
+      var lname = document.getElementsByName('lname')[0].value  //用户输入的 lname
+      var xhr = new XMLHttpRequest()
+      // 使用HTTP POST请求与服务器交互数据
+      xhr.open("POST", "http://localhost:3111/application-json", true)
+      // 设置发送数据的请求格式 application/json
+      xhr.setRequestHeader('content-type', 'application/json')
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          document.getElementById('result').innerHTML=JSON.stringify(JSON.parse(xhr.responseText))
+          console.log()
+        }
+      }
+      var sendData = { fname, lname }
+      //将用户输入值序列化成字符串
+      xhr.send(JSON.stringify(sendData))
+    }
+  </script>
+</body>
+
+</html>
