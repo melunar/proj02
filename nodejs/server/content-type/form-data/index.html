@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>multipart/form-data</title>
+</head>
+<body>
+  <!-- 
+
+    js中通过 new FormData() 发送数据
+
+    表单中通过以下demo
+
+   -->
+  <form action="http://localhost:3111/form-data" method="post" enctype="multipart/form-data">
+    <p>name: <input type="text" name="name" /></p>
+    <p>age : <input type="number" name="age" /></p>
+    <input type="submit" value="Submit" />
+  </form>
+</body>
+</html>
