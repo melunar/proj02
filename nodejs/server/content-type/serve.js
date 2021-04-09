@@ -34,6 +34,11 @@ app.post('/application-json', jsonParser, function (req, res) {
   console.log('get application-json Params: ', req.body)
   res.json({ result: '您发送的数据是：', data: req.body })
 })
+/** form get 数据类型接口演示 */
+app.get('/get', function (req, res) {
+  console.log('get Params: ', req.query)
+  res.json({ result: '您发送的数据是：', data: req.query })
+})
 const port = 3111
 app.listen(port, () => {
   console.log(`Started at port ${port}`)

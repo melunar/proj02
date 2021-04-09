@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>get</title>
+</head>
+<body>
+  <!-- Get方法是不含“body”的，它的请求参数都会被编码到url后面，所以在Get方法中加Content-type是无用的 -->
+  <form action="http://localhost:3111/get" method="get">
+    <p>name: <input type="text" name="name" /></p>
+    <p>age : <input type="number" name="age" /></p>
+    <input type="submit" value="Submit - get" />
+  </form>
+</body>
+</html>
